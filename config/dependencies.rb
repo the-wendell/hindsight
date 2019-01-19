@@ -1,0 +1,11 @@
+require 'require_all'
+require 'ostruct'
+require 'httparty'
+require 'date'
+require 'json'
+require 'bigdecimal'
+
+require_rel '/'
+require_rel '../app/services'
+require_rel '../app/api_utils'
+require_rel '../app/stock_metrics'
