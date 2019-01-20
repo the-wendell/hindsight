@@ -1,6 +1,6 @@
-require_relative '../spec_dependencies'
+require_relative '../../spec_dependencies'
 
-describe Services::ParseResponse do
+describe ApiUtils::Services::ParseEodResponse do
   let(:response_body) do
     {
       'dataset' => {

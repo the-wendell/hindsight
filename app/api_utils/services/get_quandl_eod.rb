@@ -1,6 +1,6 @@
 module ApiUtils
   module Services
-    class QuandiApi < ::Services::Base
+    class GetQuandlEod < ::Services::Base
       BASE_URL = 'https://www.quandl.com/api/v3/datasets/EOD/'.freeze
       API_KEY = ENV['api_key']
 

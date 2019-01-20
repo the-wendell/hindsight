@@ -1,6 +1,6 @@
 module ApiUtils
   module Services
-    class ParseResponse < ::Services::Base
+    class ParseEodResponse < ::Services::Base
       def initialize(response_body)
         @response_body = JSON.parse(response_body)
       end

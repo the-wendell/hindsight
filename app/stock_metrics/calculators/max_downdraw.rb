@@ -1,26 +1,19 @@
 module StockMetrics
-  module Services
-    class Calculator < ::Services::Base
-      def initialize(days)
-        @days = days
+  module Calculators
+    class MaxDowndraw < ::Services::Base
+      def initialize(closing_prices)
+        @closing_prices = closing_prices
       end
 
       def call
-        OpenStruct.new(
-          total_return: total_return,
-          max_downdraw: max_downdraw
-        )
+        calculate_max_down_draw
       end
 
       private
 
-      attr_reader :days
+      attr_reader :closing_prices
 
-      def total_return
-        (ending_price - initial_price + dividends) / initial_price
-      end
-
-      def max_downdraw
+      def calculate_max_down_draw
         (find_from_peak(closing_prices, []) + find_from_trough(closing_prices, [])).min
       end
 
@@ -46,22 +39,6 @@ module StockMetrics
 
       def calculate_downdraw(peak, trough)
         (trough - peak) / peak
-      end
-
-      def ending_price
-        days.most_recent.close
-      end
-
-      def initial_price
-        @initial_price ||= days.oldest.close
-      end
-
-      def dividends
-        days.all.inject(0) { |total, day| total + day.dividend }
-      end
-
-      def closing_prices
-        @closing_prices ||= days.all.map(&:close)
       end
     end
   end

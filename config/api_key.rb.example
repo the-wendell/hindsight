@@ -1,1 +1,3 @@
 ENV['api_key'] = 'your key'
+ENV['imgflip_username'] = 'your user name'
+ENV['imgflip_password'] = 'your password' 
