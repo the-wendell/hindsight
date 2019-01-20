@@ -6,7 +6,7 @@ module StockMetrics
       end
 
       def call
-        calculate_max_down_draw
+        calculate_max_down_draw || 0.0
       end
 
       private
@@ -18,23 +18,38 @@ module StockMetrics
       end
 
       def find_from_peak(prices, downdraws)
-        peak_index = prices.index(prices.max)
-        trough_index = prices.index(prices[0..peak_index].min)
+        arr = split_prices_on(:peak, prices)
+        return downdraws if arr.length <= 1
 
-        return downdraws if peak_index == trough_index
+        peak_index = -1
+        trough_index = arr.index(arr.min)
 
-        downdraws << calculate_downdraw(prices[peak_index], prices[trough_index])
-        find_from_peak(prices[0..trough_index], downdraws)
+        downdraws << calculate_downdraw(arr[peak_index], arr[trough_index])
+
+        find_from_peak(arr[0..trough_index], downdraws)
       end
 
       def find_from_trough(prices, downdraws)
-        trough_index = prices.index(prices.min)
-        peak_index = prices.index(prices[trough_index..-1].max)
+        arr = split_prices_on(:trough, prices)
+        return downdraws if arr.length <= 1
 
-        return downdraws if trough_index == peak_index
+        trough_index = 0
+        peak_index = arr.index(arr.max)
 
-        downdraws << calculate_downdraw(prices[peak_index], prices[trough_index])
-        find_from_trough(prices[peak_index..-1], downdraws)
+        downdraws << calculate_downdraw(arr[peak_index], arr[trough_index])
+
+        find_from_trough(arr[peak_index..-1], downdraws)
+      end
+
+      def split_prices_on(type, prices)
+        case type
+        when :trough
+          split_index = prices.index(prices.min)
+          prices[split_index..-1]
+        when :peak
+          split_index = prices.index(prices.max)
+          prices[0..split_index]
+        end
       end
 
       def calculate_downdraw(peak, trough)
