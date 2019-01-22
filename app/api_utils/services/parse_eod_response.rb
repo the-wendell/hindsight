@@ -36,7 +36,7 @@ module ApiUtils
       def format_value(value)
         return value unless value.is_a? Integer
 
-        BigDecimal.new(value)
+        BigDecimal(value)
       end
     end
   end

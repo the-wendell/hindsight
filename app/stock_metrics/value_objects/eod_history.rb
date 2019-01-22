@@ -6,11 +6,11 @@ module StockMetrics
       end
 
       def final_price
-        days.most_recent.close
+        days.most_recent.adj_close
       end
 
       def initial_price
-        days.oldest.close
+        days.oldest.adj_close
       end
 
       def dividends
@@ -18,7 +18,7 @@ module StockMetrics
       end
 
       def closing_prices
-        days.all.map(&:close)
+        days.all.map(&:adj_close)
       end
 
       private
