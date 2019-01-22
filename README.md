@@ -7,9 +7,9 @@ HindSite has one function that can be called from the terminal `eod-history-for`
 `eod-history-for 2018-10-20 HD` returns the calculated values for the `HD` stock from the time period which starts at `2018-10-20` and finishes at todays date.
 
 ## Getting Started
-Requires Ruby 2.5 and Bundler
-You will need a Quandl account
-You will need a imgflip account
+* Requires Ruby 2.5 and Bundler.
+* You will need a Quandl account.
+* You will need an imgflip account.
 
 1. Clone the Repo
 2. `cd hindsight`
