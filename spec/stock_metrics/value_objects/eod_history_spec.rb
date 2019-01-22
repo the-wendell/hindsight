@@ -10,9 +10,9 @@ describe StockMetrics::ValueObjects::EodHistory do
   end
   let(:day_structs) do
     [
-      OpenStruct.new(close: 5, dividend: 1),
-      OpenStruct.new(close: 10, dividend: 2),
-      OpenStruct.new(close: 20, dividend: 3),
+      OpenStruct.new(adj_close: 5, dividend: 1),
+      OpenStruct.new(adj_close: 10, dividend: 2),
+      OpenStruct.new(adj_close: 20, dividend: 3),
     ]
   end
   let(:eod_history) { described_class.new(days) }

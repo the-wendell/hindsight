@@ -22,7 +22,7 @@ module StockMetrics
         return downdraws if arr.length <= 1
 
         peak_index = -1
-        trough_index = arr.index(arr.min)
+        trough_index = arr.rindex(arr.min)
 
         downdraws << calculate_downdraw(arr[peak_index], arr[trough_index])
 
@@ -47,7 +47,7 @@ module StockMetrics
           split_index = prices.index(prices.min)
           prices[split_index..-1]
         when :peak
-          split_index = prices.index(prices.max)
+          split_index = prices.rindex(prices.max)
           prices[0..split_index]
         end
       end
